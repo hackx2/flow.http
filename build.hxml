@@ -1,0 +1,4 @@
+--class-path .
+--main Main
+--hl bin/out.hl
+--cmd hl bin/out.hl

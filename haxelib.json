@@ -1,0 +1,11 @@
+{
+    "name": "flow.http",
+    "license": "MIT",
+    "url": "https://github.com/hackx2/flow.http",
+    "version": "0.0.1",
+    "description": "<3",
+    "releasenote": "sure",
+    "contributors": ["hackx2"],
+    "classPath": "/",
+    "dependencies": {}
+}

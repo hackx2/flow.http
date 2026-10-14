@@ -16,33 +16,33 @@ final class Cookie {
 	public final value:String;
 
 	public var secure:Bool;
-	public var httpOnly:Bool;
+	public var http_only:Bool;
 	public var path:Null<String>;
 	public var domain:Null<String>;
-	public var maxAge:Null<Int>;
+	public var max_age:Null<Int>;
 	public var expires:Null<Date>;
-	public var sameSite:Null<SameSite>;
+	public var same_site:Null<SameSite>;
 
 	public function new(
 		name:String, 
 		value:String, 
 		?path:String = "/", 
 		?domain:String, 
-		?maxAge:Int, 
+		?max_age:Int, 
 		?expires:Date, 
 		secure:Bool = false, 
-		httpOnly:Bool = false, 
-		?sameSite:SameSite
+		http_only:Bool = false, 
+		?same_site:SameSite
 	) {
 		this.name = name;
 		this.value = value;
 		this.path = path;
 		this.domain = domain;
-		this.maxAge = maxAge;
+		this.max_age = max_age;
 		this.expires = expires;
 		this.secure = secure;
-		this.httpOnly = httpOnly;
-		this.sameSite = sameSite;
+		this.http_only = http_only;
+		this.same_site = same_site;
 	}
 
 	public function toString():String {
@@ -51,13 +51,13 @@ final class Cookie {
 
 		if (path != null) b.add('; Path=$path');
 		if (domain != null) b.add('; Domain=$domain');
-		if (maxAge != null) b.add('; Max-Age=$maxAge');
+		if (max_age != null) b.add('; Max-Age=$max_age');
 		if (expires != null) b.add('; Expires=${HttpDate.format(expires)}');
 		// If SameSite=None is set then the Secure attri must also be set.
 		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies
-		if (secure || sameSite == None) b.add('; Secure');
-		if (httpOnly) b.add('; HttpOnly');
-		if (sameSite != null) b.add('; SameSite=${(sameSite : String)}');
+		if (secure || same_site == None) b.add('; Secure');
+		if (http_only) b.add('; HttpOnly');
+		if (same_site != null) b.add('; SameSite=${(same_site : String)}');
 
 		return b.toString();
 	}

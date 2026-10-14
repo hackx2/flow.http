@@ -61,8 +61,15 @@ function main(){
             case [Get, '/cookie']:
                 if(req.cookies.exists('meow')) return Response.txt(OK, 'grr');
 
-                final cookie = new Cookie('meow', 'true...', '/cookie', null, 72783187, null, false, true, Lax);
-                return Response.json(OK, Json.parse('{"ok": true}')).cookie(cookie);
+                final cookie:Cookie = {
+                    name: 'meow',
+                    value: 'true...',
+                    path: '/cookie',
+                    max_age: 72783187,
+                    http_only: true,
+                    same_site: Lax
+                }
+				return Response.json(OK, { ok: true }).cookie(cookie);
             
             case [_, '/json' | '/cookie' | '/video' | '/video-html']: return Response.txt(MethodNotAllowed, 'heh').header(Allow, 'GET');
             case _: return Response.txt(NotFound, 'not found\n\nidior');

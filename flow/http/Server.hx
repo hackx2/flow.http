@@ -58,13 +58,24 @@ class Server {
 		tcp?.close(callback);
 	}
 
+	private function find_header_end(b:Bytes):Int {
+		var i = 0;//e
+		while (i + 3 < b.length) {
+			if (b.get(i) == "\r".code && b.get(i + 1) == "\n".code 
+				&& b.get(i + 2) == "\r".code && b.get(i + 3) == "\n".code)
+				return i;
+			i++;
+		}
+		return -1;
+	}
+
 	private function process(client:Stream) {
 		var buf = Bytes.alloc(0);
 		
 		client.readStart(data -> {
 			if (data == null) return client.close();
 
-			buf = buf.append(data);
+			buf = buf.concat(data);
 
 			var close = true;
 			try {
@@ -85,7 +96,7 @@ class Server {
 					}
 					#end
 
-					final end = buf.toString().indexOf("\r\n\r\n");
+					final end = find_header_end(buf);
 					if (end < 0 ? buf.length > max_header_bytes : end > max_header_bytes) {
 						reject(client, Http11, RequestHeaderFieldsTooLarge, "header fields too large");
 						break;

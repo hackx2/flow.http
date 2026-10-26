@@ -52,6 +52,7 @@ Then build with `haxe build.hxml`, and test with `curl -i http://127.0.0.1:3000/
   - [ ] Ensure `Content-Length` header value only contains digits, reject if it doesn't.
 - [x] reject `Transfer-Encoding` on `HTTP/1.0` requests
 - [x] close the connection after any error
+- [ ] AcceptEncoding ContentEncoding
 
 ## http/0.9 (experimental / untested)
 - [x] `GET` only

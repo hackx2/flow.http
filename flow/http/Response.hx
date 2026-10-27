@@ -46,7 +46,7 @@ final class Response {
 	}
 
 	public static function json(status:Null<StatusCode>, data:Dynamic) {
-		final json_str:String = haxe.Json.stringify(data);
+		final json_str:String = data is String ? cast data : haxe.Json.stringify(data);
 		return new Response(status ?? OK, Bytes.ofString(json_str), Headers.from([
 			ContentType => [MimeType.Json.charset(Utf8)]
 		]));

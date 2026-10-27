@@ -52,6 +52,13 @@ final class Response {
 		]));
 	}
 
+	public static function bytes(status:Null<StatusCode>, bytes:Bytes, ?mimeType:String) {
+		final type = mimeType ?? MimeType.OctetStream;
+		return new Response(status ?? OK, bytes, Headers.from([
+			ContentType => [type]
+		]));
+	}
+
 	public static function file(status:Null<StatusCode>, path:String, ?headers:Headers) {
 		if (!FileSystem.exists(path) || FileSystem.isDirectory(path)) return txt(NotFound, "Resource not found");
 

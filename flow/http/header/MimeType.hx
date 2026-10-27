@@ -12,6 +12,7 @@ enum abstract MimeType(String) from String to String {
 	@:ext("jpg", "jpeg") var Jpeg = "image/jpeg";
 	@:ext("gif") var Gif = "image/gif";
 	@:ext("svg") var Svg = "image/svg+xml";
+	@:ext("webp") var Webp = "image/webp";
 	@:ext("mp4") var Mp4 = "video/mp4";
 
 	// todo: i think im forgetting something :c
